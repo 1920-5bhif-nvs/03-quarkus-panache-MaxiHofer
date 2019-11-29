@@ -1,17 +1,16 @@
 package at.htl.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
 import javax.persistence.*;
 
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Transmission.findAll", query = "select t from Transmission t"),
 })
-public class Transmission {
+public class Transmission extends PanacheEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private int gears;
+    public int gears;
 
     public Transmission() {
     }
@@ -20,19 +19,4 @@ public class Transmission {
         this.gears = gears;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getGears() {
-        return gears;
-    }
-
-    public void setGears(int gears) {
-        this.gears = gears;
-    }
 }

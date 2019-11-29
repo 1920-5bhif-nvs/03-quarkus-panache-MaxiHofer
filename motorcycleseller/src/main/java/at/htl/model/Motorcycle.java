@@ -1,5 +1,7 @@
 package at.htl.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -7,21 +9,18 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "Motorcycle.findAll", query = "select m from Motorcycle m"),
 })
-public class Motorcycle {
+public class Motorcycle extends PanacheEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String colour;
-    private int hp;
+    public String colour;
+    public int hp;
     @OneToOne(cascade = CascadeType.ALL)
-    private MotorcycleType motorcycleType;
+    public MotorcycleType motorcycleType;
     @OneToOne(cascade = CascadeType.ALL)
-    private Engine engine;
+    public Engine engine;
     @OneToOne(cascade = CascadeType.ALL)
-    private Transmission transmission;
+    public Transmission transmission;
     @OneToMany
-    private List<Purchase> purchases;
+    public List<Purchase> purchases;
 
 
     public Motorcycle() {
@@ -35,51 +34,4 @@ public class Motorcycle {
         this.transmission = transmission;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public MotorcycleType getMotorcycleType() {
-        return motorcycleType;
-    }
-
-    public void setMotorcycleType(MotorcycleType motorcycleType) {
-        this.motorcycleType = motorcycleType;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getColour() {
-        return colour;
-    }
-
-    public void setColour(String colour) {
-        this.colour = colour;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public Engine getEngine() {
-        return engine;
-    }
-
-    public void setEngine(Engine engine) {
-        this.engine = engine;
-    }
-
-    public Transmission getTransmission() {
-        return transmission;
-    }
-
-    public void setTransmission(Transmission transmission) {
-        this.transmission = transmission;
-    }
 }
